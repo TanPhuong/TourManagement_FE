@@ -12,6 +12,18 @@ const ListTourPage = () => {
     const [tours, setTour] = useState([]);
     const navigate = useNavigate();
 
+    const [search, setSearch] = useState('');
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value)
+        console.log(search)
+    }
+
+    const searchTour = async () => {
+        const { data } = await axios.get(`${process.env.REACT_APP_API_KEY}/tour/search-tour?place=${search}`);
+        setTour(data?.checkTour);
+    }
+
     // Nhận data từ API 
     const getAllProduct = async () => {
         const { data } = await axios.get(`${process.env.REACT_APP_API_KEY}/tour/list-tour`);
@@ -116,6 +128,11 @@ const ListTourPage = () => {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div className="search-section">
+                    <input type="text" placeholder="Nhập email" onChange={handleSearch} value={search}/>
+                    <button className="search-booking-management-btn" onClick={searchTour}>Tìm kiếm</button>
                 </div>
 
                 <div className="tour-list--section">

@@ -69,75 +69,6 @@ const BookingPage = () => {
         setCustomerType(newArray)
     }
 
-    // // Chỉnh số lượng adult
-    // const handleAdultPlus = () => {
-    //     setAdult(adult++);
-    //     setIsAdult(true);
-    //     setIsChildren(false);
-    //     setIsTeen(false);
-    //     setIsInfant(false);
-    // }
-
-    // const handleAdultMinor = () => {
-    //     if(adult < 1) {
-    //         alert('Không thể bé hơn 1'); 
-    //     } else {
-    //         setAdult(adult--);
-    //     }
-    // }
-
-    // // Chỉnh số lượng teen
-    // const handleTeenPlus = () => {
-    //     setTeen(teen++);
-    //     setIsAdult(false);
-    //     setIsChildren(false);
-    //     setIsTeen(true);
-    //     setIsInfant(false);
-    // }
-
-    // const handleTeenMinor = () => {
-    //     if(teen < 0) {
-    //         alert('Không thể bé hơn 0'); 
-    //     } else {
-    //         setTeen(teen--);
-    //     }
-    // }
-
-    // // Chỉnh số lượng children
-    // const handleChildrenPlus = () => {
-    //     setChildren(children++);
-    //     setIsAdult(false);
-    //     setIsChildren(true);
-    //     setIsTeen(false);
-    //     setIsInfant(false);
-    // }
-
-    // const handleChildrenMinor = () => {
-    //     if(children < 0) {
-    //         alert('Không thể bé hơn 0'); 
-    //     } else {
-    //         setChildren(children--);
-    //     }
-    // }
-
-    // // Chỉnh số lượng infant
-    // const handleInfantPlus = () => {
-    //     setInfant(infant++);
-    //     setIsAdult(false);
-    //     setIsChildren(false);
-    //     setIsTeen(false);
-    //     setIsInfant(true);
-    // }
-
-    // const handleInfantMinor = () => {
-    //     if(infant < 0) {
-    //         alert('Không thể bé hơn 0'); 
-    //     } else {
-    //         setInfant(infant--);
-    //     }
-    // }
-
-
    // Nhập vào form mới sau khi thay đổi số lượng khách
     const handleOnChangeName = (e, index) => {
         setCustomerName((prevCustomerName) => {
@@ -214,6 +145,35 @@ const BookingPage = () => {
     useEffect(() => {
         setPayPrice(totalPrice)
     },[totalPrice])
+
+    // Set state cho type
+    useEffect(() => {
+        setIsAdult(true);
+        setIsTeen(false);
+        setIsChildren(false);
+        setIsInfant(false);
+    },[adult])
+
+    useEffect(() => {
+        setIsAdult(false);
+        setIsTeen(true);
+        setIsChildren(false);
+        setIsInfant(false);
+    },[teen])
+
+    useEffect(() => {
+        setIsAdult(false);
+        setIsTeen(false);
+        setIsChildren(true);
+        setIsInfant(false);
+    },[children])
+
+    useEffect(() => {
+        setIsAdult(false);
+        setIsTeen(false);
+        setIsChildren(false);
+        setIsInfant(true);
+    },[infant])
 
     // Truyền data qua API
     const mutation = useMutationHooks (
