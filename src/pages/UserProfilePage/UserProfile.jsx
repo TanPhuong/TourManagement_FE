@@ -1,40 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HeaderComponent from "../../component/HeaderComponent/HeaderComponent"
 import FooterComponent from "../../component/FooterComponent/FooterComponent"
 import '../UserProfilePage/UserProfile.css'
 import { useNavigate } from "react-router-dom";
 import * as UserService from "../../services/UserService"
 import { useMutationHooks } from "../../hooks/useMutationHook";
+import { AuthContext } from "../../pattern/context";
 
 const UserProfilePage = () => {
 
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const {user, logout} = useContext(AuthContext);
+    const [username, setUsername] = useState(user.username);
+    const [email, setEmail] = useState(user.email);
+    const [phone, setPhone] = useState(user.phone);
+
 
     const navigate = useNavigate(); 
-
-    // Nhận data của user từ sessionStorage và đưa vào form thông tin của user
-    const getDetailUser = () => {
-        const userData = sessionStorage.getItem('UserInfo'); 
-        const userInfo = JSON.parse(userData);
-
-        setUsername(userInfo.data.name);
-        setEmail(userInfo.data.email);
-        setPhone(userInfo.data.phone);
-    }
-
-    useEffect(() => {
-        getDetailUser()
-    },[])
 
     // Nhận giá trị input
     const handleOnChangeName = (e) => {
         setUsername(e.target.value);
-    }
-
-    const handleOnChangeEmail = (e) => {
-        setEmail(e.target.value);
     }
 
     const handleOnChangePhone = (e) => {
@@ -54,10 +39,7 @@ const UserProfilePage = () => {
 
 
     // Cập nhật data mới từ user
-    const userData2 = sessionStorage.getItem('UserInfo'); 
-    const userInfo2 = JSON.parse(userData2);
-
-    const id = userInfo2.data._id;
+    const id = user.id;
 
     const mutation = useMutationHooks(
         data => UserService.updateUser(id, data)

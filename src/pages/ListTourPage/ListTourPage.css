@@ -161,3 +161,24 @@
     font-weight: bold;
     margin-left: 5px;
 }
+
+.list-tour--body .pagination {
+    width: 100%;
+    height: 30vh;
+}
+
+.list-tour--body .search-section {
+    padding-left: 40px; 
+}
+
+.list-tour--body .search-section input {
+    width: 40%;
+    padding: 10px 20px;
+    border-radius: 10px; 
+}
+
+.list-tour--body .search-section button {
+    margin-left: 30px;
+    padding: 10px 20px; 
+    
+}

@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null); 
 
-
   const login = async () => {
     try {
         const response = await axios.post(`${process.env.REACT_APP_API_KEY}/user/sign-in`, { email, password });
