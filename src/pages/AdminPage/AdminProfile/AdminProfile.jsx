@@ -1,36 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HeaderComponent from "../../../component/HeaderComponent/HeaderComponent";
 import '../AdminProfile/AdminProfile.css'
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../pattern/context";
 
 const AdminProfilePage = () => {
 
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('');
+    const {user, logout} = useContext(AuthContext);
+
+    const [username, setUsername] = useState(user.data.name)
+    const [email, setEmail] = useState(user.data.email);
     const [phone, setPhone] = useState('');
 
     const navigate = useNavigate(); 
 
-    const getDetailUser = () => {
-        const userData = sessionStorage.getItem('UserInfo'); 
-
-        const userInfo = JSON.parse(userData);
-        console.log(userInfo.data);
-
-        setUsername(userInfo.data.name);
-        setEmail(userInfo.data.email);
-    }
-
-    useEffect(() => {
-        getDetailUser()
-    },[])
-
     const handleOnChangeName = (e) => {
         setUsername(e.target.value);
-    }
-
-    const handleOnChangeEmail = (e) => {
-        setEmail(e.target.value);
     }
 
     const handleOnChangePhone = (e) => {
@@ -38,7 +23,7 @@ const AdminProfilePage = () => {
     }   
 
     const handleLogOut = () => {
-        sessionStorage.removeItem('UserInfo');
+        logout();
         navigate('/home');
     }
 

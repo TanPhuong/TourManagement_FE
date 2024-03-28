@@ -26,6 +26,7 @@ const SignInPage = () => {
     useEffect(() => {
         if(user) {
             console.log(user);
+            console.log(user.data.email);
             navigate('/home');
         } else {
             logout();

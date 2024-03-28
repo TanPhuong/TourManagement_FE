@@ -5,6 +5,7 @@ import '../../css/bootstrap.min.css'
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../pattern/context";
 
+
 const HeaderComponent = () => {
 
     const navigate = useNavigate(); 
@@ -21,14 +22,10 @@ const HeaderComponent = () => {
 
     const handleUserProfile = () => {
         
-        const userInfostring = sessionStorage.getItem('UserInfo')
-
-        var userInfo = JSON.parse(user);
-
-        if (userInfo) {
-            if(!userInfo.data.isAdmin) {
+        if (user) {
+            if(!user.data.isAdmin) {
                 navigate('/user/profile');
-            } else if(userInfo.data.isAdmin){
+            } else if(user.data.isAdmin){
                 navigate('/admin/profile');
             }
         } else {

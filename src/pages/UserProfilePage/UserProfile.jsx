@@ -10,9 +10,9 @@ import { AuthContext } from "../../pattern/context";
 const UserProfilePage = () => {
 
     const {user, logout} = useContext(AuthContext);
-    const [username, setUsername] = useState(user.username);
-    const [email, setEmail] = useState(user.email);
-    const [phone, setPhone] = useState(user.phone);
+    const [username, setUsername] = useState(user.data.username);
+    const [email, setEmail] = useState(user.data.email);
+    const [phone, setPhone] = useState('');
 
 
     const navigate = useNavigate(); 
@@ -29,7 +29,7 @@ const UserProfilePage = () => {
 
     // Chuyển hướng trang
     const handleLogOut = () => {
-        sessionStorage.removeItem('UserInfo');
+        logout();
         navigate('/home');
     }
 
@@ -39,7 +39,7 @@ const UserProfilePage = () => {
 
 
     // Cập nhật data mới từ user
-    const id = user.id;
+    const id = user.data._id;
 
     const mutation = useMutationHooks(
         data => UserService.updateUser(id, data)
